@@ -1,0 +1,3 @@
+isSlowed=1
+isSlippery=0
+isMoonGrav=0
