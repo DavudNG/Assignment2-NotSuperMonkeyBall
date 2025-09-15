@@ -19,7 +19,7 @@ public class ReadWrite : MonoBehaviour
                 if (line.Contains(attribute))
                 {
                     storeLine = line.Split('=');
-                    if (storeLine[1] == "1")
+                    if (storeLine[1] == "true")
                     {
                         return true;
                     }
@@ -33,6 +33,23 @@ public class ReadWrite : MonoBehaviour
             //Debug.Log("scoreB: " + scoreB);
         }
         return false;
+    }
+    public static string ReturnAttribute(String attribute)
+    {
+        using (StreamReader reader = new StreamReader(filePath))
+        {
+            string line;
+            string[] storeLine;
+            while ((line = reader.ReadLine()) != null)
+            {
+                if (line.Contains(attribute))
+                {
+                    storeLine = line.Split('=');
+                    return storeLine[1];
+                }
+            }
+        }
+        return null;
     }
 
     public static void WriteAttribute(String attribute, String value)

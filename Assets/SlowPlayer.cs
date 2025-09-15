@@ -8,6 +8,11 @@ public class SlowPlayer : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        ReadWrite.WriteAttribute("isSlowed", "1");
+        ReadWrite.WriteAttribute("isSlowed", "true");
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        ReadWrite.WriteAttribute("isSlowed", "true");
     }
 }
