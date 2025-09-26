@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Threading;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -12,11 +13,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float moveSpeed;
     private float initialMoveSpeed;
     [SerializeField] public float jumpForce;
-    private bool touchingGround = false;
+    //public bool touchingGround = false;
+    public bool debugGroundCheck;
     private float knockbackTimer;
     private bool knockedBack;
 
+    public SpriteRenderer myRenderer;
+    public Animator myAnimator;
     private Vector2 movementInput;
+    public Vector2 raySize;
+    public float castDistance;
+    public LayerMask groundLayer;
 
     private void Awake()
     {
@@ -30,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        float move = Input.GetAxis("Horizontal");
+        
         if (!knockedBack)
         {
            //if (int.TryParse(ReadWrite.ReturnAttribute("isSlippery"), out _))
@@ -39,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
            //}
            // else
            // {
-                float move = Input.GetAxis("Horizontal");
+                
                 //body.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * moveSpeed, body.linearVelocity.y);
 
                 //if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
@@ -53,12 +62,27 @@ public class PlayerMovement : MonoBehaviour
                 //    movementInput = new Vector2(-moveSpeed,0);
                 //}
                 movementInput = new Vector2(move, 0);
+                
            // }
-            if (Input.GetKeyDown(KeyCode.Space) && touchingGround == true)
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
             {
                 body.linearVelocity = new Vector2(body.linearVelocity.x, jumpForce);
-                touchingGround = false;
+                //touchingGround = false;
             }
+
+            myAnimator.SetFloat("speed", Mathf.Abs(movementInput.x));
+            myAnimator.SetFloat("vertical_speed", body.linearVelocity.y);
+            myAnimator.SetBool("grounded", isGrounded());
+            debugGroundCheck = isGrounded();
+        }
+        
+        if(move > 0)
+        {
+            myRenderer.flipX = false;
+        }
+        else if(move < 0)
+        {
+            myRenderer.flipX = true;
         }
     }
 
@@ -78,6 +102,24 @@ public class PlayerMovement : MonoBehaviour
         //}
     }
 
+    public bool isGrounded()
+    {
+        if(Physics2D.BoxCast(transform.position, raySize, 0, -transform.up, castDistance, groundLayer))
+        {
+            return true;
+        }
+        
+        else
+        {
+            return false;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(transform.position - transform.up * castDistance, raySize);
+    }
+
     public void Explode(Vector2 force, float duration)
     {
         StartCoroutine(ExplodeCoroutine(force, duration));
@@ -92,29 +134,29 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            touchingGround = true;
-        }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Ball"))
+    //    {
+    //        touchingGround = true;
+    //    }
 
-        if (ReadWrite.CheckAttribute("isSlowed"))
-        {
-            moveSpeed = initialMoveSpeed / 4;
-            Debug.Log("new movespeed: " + moveSpeed.ToString());
-        }
-        else
-        {
-            moveSpeed = initialMoveSpeed;
-        }
-    }
+    //    if (ReadWrite.CheckAttribute("isSlowed"))
+    //    {
+    //        moveSpeed = initialMoveSpeed / 4;
+    //        Debug.Log("new movespeed: " + moveSpeed.ToString());
+    //    }
+    //    else
+    //    {
+    //        moveSpeed = initialMoveSpeed;
+    //    }
+    //}
     
-        private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            touchingGround = false;
-        }
-    }
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Ball"))
+    //    {
+    //        touchingGround = false;
+    //    }
+    //} 
 }
