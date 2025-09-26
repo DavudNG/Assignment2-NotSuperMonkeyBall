@@ -32,7 +32,7 @@ public class ParentEnemy : MonoBehaviour
         while (true)
         {
             Vector3 direction = player.position - transform.position;
-            body.velocity = new Vector2(direction.x, 0);
+            body.linearVelocity = new Vector2(direction.x, 0);
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -41,9 +41,9 @@ public class ParentEnemy : MonoBehaviour
     {
         while (true)
         {
-            body.velocity = new Vector2(-BNF_speed, body.velocity.y);
+            body.linearVelocity = new Vector2(-BNF_speed, body.linearVelocity.y);
             yield return new WaitForSeconds(BNF_time);
-            body.velocity = new Vector2(BNF_speed, body.velocity.y);
+            body.linearVelocity = new Vector2(BNF_speed, body.linearVelocity.y);
             yield return new WaitForSeconds(BNF_time);
         }
     }

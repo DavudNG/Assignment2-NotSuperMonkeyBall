@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private float knockbackTimer;
     private bool knockedBack;
 
+    private Vector2 movementInput;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -30,33 +32,52 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!knockedBack)
         {
-            if (int.TryParse(ReadWrite.ReturnAttribute("isSlippery"), out _))
-            {
-                float move = Input.GetAxisRaw("Horizontal");
-                body.AddForce(new Vector2(move * int.Parse(ReadWrite.ReturnAttribute("isSlippery")), 0));
-            }
-            else
-            {
-                body.velocity = new Vector2(Input.GetAxis("Horizontal") * moveSpeed, body.velocity.y);
+           //if (int.TryParse(ReadWrite.ReturnAttribute("isSlippery"), out _))
+           //{
+           //    float move = Input.GetAxisRaw("Horizontal");
+           //    body.AddForce(new Vector2(move * int.Parse(ReadWrite.ReturnAttribute("isSlippery")), 0));
+           //}
+           // else
+           // {
+                float move = Input.GetAxis("Horizontal");
+                //body.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * moveSpeed, body.linearVelocity.y);
 
-                if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
-                {
-                    transform.localScale = new Vector3(1, 1, 1);
-                }
-
-                if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
-                {
-                    transform.localScale = new Vector3(-1, 1, 1);
-                }
-            }
+                //if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+                //{
+                //    movementInput = new Vector2(moveSpeed,0);
+                //}
+                //
+                //if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+                //{
+                //    // body.AddForce(new Vector2(-moveSpeed, 0), ForceMode2D.Force);
+                //    movementInput = new Vector2(-moveSpeed,0);
+                //}
+                movementInput = new Vector2(move, 0);
+           // }
             if (Input.GetKeyDown(KeyCode.Space) && touchingGround == true)
             {
-                body.velocity = new Vector2(body.velocity.x, jumpForce);
+                body.linearVelocity = new Vector2(body.linearVelocity.x, jumpForce);
                 touchingGround = false;
             }
         }
     }
-    
+
+    private void FixedUpdate()
+    {
+        //if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        //{
+        //    body.AddForce(movementInput * moveSpeed * Time.fixedDeltaTime, ForceMode2D.Force);
+        //}
+
+        if(movementInput.magnitude > 0 || movementInput.magnitude < 0)
+            body.AddForce(movementInput * moveSpeed, ForceMode2D.Force);
+
+        //if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+        //{
+        //    body.AddForce(movementInput * moveSpeed * Time.fixedDeltaTime, ForceMode2D.Force);
+        //}
+    }
+
     public void Explode(Vector2 force, float duration)
     {
         StartCoroutine(ExplodeCoroutine(force, duration));
