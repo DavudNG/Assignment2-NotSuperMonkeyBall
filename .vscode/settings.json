@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Week3Lab2.sln"
+    "dotnet.defaultSolution": "Assignment2-NotSuperMonkeyBall.sln"
 }
