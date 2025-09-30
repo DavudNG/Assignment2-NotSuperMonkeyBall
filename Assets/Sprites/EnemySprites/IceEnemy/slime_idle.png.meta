@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 5955fb220215efc4c915db0fc82e9aa2
+guid: 7daba383c6654c045a8fa0d82f245383
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5597870152817152483
-    second: Monkey Walk 2_0
+      213: 5463189583543264802
+    second: slime_idle_0
+  - first:
+      213: 4849661833066715017
+    second: slime_idle_1
+  - first:
+      213: -4815338781847372184
+    second: slime_idle_2
+  - first:
+      213: 2331914284563532042
+    second: slime_idle_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +105,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Monkey Walk 2_0
+      name: slime_idle_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 5
-        width: 22
-        height: 21
+        x: 7
+        y: 9
+        width: 18
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3e19d65ce31afad40800000000000000
-      internalID: 5597870152817152483
+      spriteID: 226e5b32bf521db40800000000000000
+      internalID: 5463189583543264802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime_idle_1
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 9
+        width: 18
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98716b81eb57d4340800000000000000
+      internalID: 4849661833066715017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime_idle_2
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 9
+        width: 18
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86e33d204ea7c2db0800000000000000
+      internalID: -4815338781847372184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime_idle_3
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 9
+        width: 18
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a098112dfaf9c5020800000000000000
+      internalID: 2331914284563532042
       vertices: []
       indices: 
       edges: []
@@ -148,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Monkey Walk 2_0: 5597870152817152483
+      slime_idle_0: 5463189583543264802
+      slime_idle_1: 4849661833066715017
+      slime_idle_2: -4815338781847372184
+      slime_idle_3: 2331914284563532042
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
