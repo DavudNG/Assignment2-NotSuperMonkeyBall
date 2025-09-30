@@ -11,6 +11,7 @@ TagManager:
   - Welcome
   - Human
   - Ball
+  - Background
   layers:
   - Default
   - TransparentFX
