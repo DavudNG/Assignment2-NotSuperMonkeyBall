@@ -9,6 +9,14 @@ public class Ball : MonoBehaviour
 
     private RigidbodyConstraints2D ogConstraints;
 
+    public bool isLaunched;
+    public bool isKicked;
+    public bool isReversed;
+    public float kickStrength;
+    public float launchStrength;
+    public float torqueStr;
+    
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,6 +35,72 @@ public class Ball : MonoBehaviour
                 Unfreeze();
             }
         }
+
+
+    }
+
+    private void FixedUpdate()
+    {
+        if(isKicked)
+        {
+            if(isReversed)
+            {
+                this.rb.AddForce(new Vector2(-kickStrength, 0), ForceMode2D.Force);
+            }
+            else
+            {
+                this.rb.AddForce(new Vector2(kickStrength, 0), ForceMode2D.Force);
+            }
+                
+            isKicked = false;
+            Debug.Log(isKicked);
+        }
+
+        if (isLaunched)
+        {
+            
+            if (isReversed)
+            {
+                this.rb.AddForce(new Vector2(-kickStrength, launchStrength), ForceMode2D.Force);
+                this.rb.AddTorque(-torqueStr);
+            }
+            else
+            {
+                this.rb.AddForce(new Vector2(kickStrength, launchStrength), ForceMode2D.Force);
+                this.rb.AddTorque(torqueStr);
+            }
+
+            isLaunched = false;
+        }
+    }
+
+    public void Launch(bool reversed)
+    {
+        if (reversed)
+        {
+            isReversed = true;
+        }
+        else 
+        { 
+            isReversed = false; 
+        }
+
+        isLaunched = true;
+    }
+
+    public void Kick(bool reversed)
+    {
+        if (reversed)
+        {
+            isReversed = true;
+        }
+        else
+        {
+            isReversed = false;
+        }
+
+        isKicked = true;
+        
     }
 
     public void Freeze(float time)
