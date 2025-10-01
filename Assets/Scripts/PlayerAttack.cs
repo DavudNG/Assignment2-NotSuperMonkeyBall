@@ -4,7 +4,9 @@ public class PlayerAttack : MonoBehaviour
 {
     public PlayerMovement myPlayer;
     public Transform AttackHitbox;
-    
+    public Animator myAnimator;
+    public SpriteRenderer myRenderer;
+
     public bool isAttacking;
     public bool isAttackReady;
 
@@ -31,90 +33,108 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (isAttackReady)
         {
-            Attack();
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                myRenderer.flipX = false;
+                myAnimator.SetBool("isKick", true);
+                isAttackReady = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                myAnimator.SetBool("isUppercut", true);
+                isAttackReady = false;
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Attack2();
-            Debug.Log("isLaunching");
-        }
+        //if (isAttacking)
+        //{
+        //    attackTimer -= Time.deltaTime;
+        //}
+        //
+        //if (attackTimer <= 0)
+        //{
+        //    isAttacking = false;
+        //}
 
-        if (isAttacking)
-        {
-            attackTimer -= Time.deltaTime;
-        }
+        //if (attackCooldownCount <= attackCooldown && !isAttacking)
+        //{
+        //    isAttackReady = true;
+        //}
 
-        if (attackTimer <= 0)
-        {
-            isAttacking = false;
-        }
 
-        if (attackCooldownCount <= attackCooldown && !isAttacking)
+
+        if (attackCooldownCount <= 0)
         {
             isAttackReady = true;
         }
-
-
+        else
+        {
+            attackCooldownCount -= Time.deltaTime;
+        }
     }
 
     public void Attack()
     {
-        if (isAttackReady)
+        RaycastHit2D attackTest;
+        attackTimer = attackTimerMax;
+        //isAttacking = true;
+
+        myAnimator.SetBool("isKick", false);
+        if (myPlayer.getFlipped() == false)
         {
-            RaycastHit2D attackTest;
-            attackTimer = attackTimerMax;
-            isAttacking = true;
-            
-            if(myPlayer.getFlipped() == false)
-            {
-                //attackTest = Physics2D.BoxCast(AttackHitbox.position, raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
-                attackTest = Physics2D.BoxCast(new Vector2(AttackHitbox.position.x + fOffset, AttackHitbox.position.y), raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
-            }
-            
-            else
-            {
-                //attackTest = Physics2D.BoxCast(new Vector2 (AttackHitbox.position.x + fOffset, AttackHitbox.position.y), raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
-                attackTest = Physics2D.BoxCast(AttackHitbox.position, raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
-            }
-                
-            if(attackTest.collider != null)
-            {
-                attackTest.collider.GetComponent<Ball>().Kick(myPlayer.getFlipped());
-                Debug.Log("isAttacking");
-            }
-            isAttackReady = false;
+            this.transform.position = new Vector2(AttackHitbox.position.x + fOffset, this.transform.position.y);
+            attackTest = Physics2D.BoxCast(new Vector2(AttackHitbox.position.x + fOffset, AttackHitbox.position.y), raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
         }
+        
+        else
+        {
+            this.transform.position = new Vector2(AttackHitbox.position.x , this.transform.position.y);
+            myRenderer.flipX = true;
+            attackTest = Physics2D.BoxCast(AttackHitbox.position, raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
+        }
+            
+        if(attackTest.collider != null)
+        {
+            attackTest.collider.GetComponent<Ball>().Kick(myPlayer.getFlipped());
+        }
+        attackCooldownCount = attackCooldown;
+        //myAnimator.SetBool("isKick", false);
     }
 
     public void Attack2()
     {
-        if (isAttackReady)
+        RaycastHit2D attackTest;
+        attackTimer = attackTimerMax;
+        //isAttacking = true;
+        myAnimator.SetBool("isUppercut", false);
+
+        if (myPlayer.getFlipped() == false)
         {
-            RaycastHit2D attackTest;
-            attackTimer = attackTimerMax;
-            isAttacking = true;
-
-            if (myPlayer.getFlipped() == false)
-            {
-                //attackTest = Physics2D.BoxCast(AttackHitbox.position, raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
-                attackTest = Physics2D.BoxCast(new Vector2(AttackHitbox.position.x + fOffset, AttackHitbox.position.y), raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
-            }
-
-            else
-            {
-                //attackTest = Physics2D.BoxCast(new Vector2 (AttackHitbox.position.x + fOffset, AttackHitbox.position.y), raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
-                attackTest = Physics2D.BoxCast(AttackHitbox.position, raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
-            }
-
-            if (attackTest.collider != null)
-            {
-                attackTest.collider.GetComponent<Ball>().Launch(myPlayer.getFlipped());
-            }
-            isAttackReady = false;
+            //attackTest = Physics2D.BoxCast(AttackHitbox.position, raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
+            //this.transform.position = new Vector2(AttackHitbox.position.x, this.transform.position.y);
+            this.transform.position = new Vector2(AttackHitbox.position.x + fOffset, this.transform.position.y);
+            myRenderer.flipX = false;
+            attackTest = Physics2D.BoxCast(new Vector2(AttackHitbox.position.x + fOffset, AttackHitbox.position.y), raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
         }
+
+        else
+        {
+            //attackTest = Physics2D.BoxCast(new Vector2 (AttackHitbox.position.x + fOffset, AttackHitbox.position.y), raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
+            //this.transform.position = new Vector2(AttackHitbox.position.x + fOffset, this.transform.position.y);
+            this.transform.position = new Vector2(AttackHitbox.position.x, this.transform.position.y);
+            myRenderer.flipX = true;
+            attackTest = Physics2D.BoxCast(AttackHitbox.position, raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
+        }
+
+        if (attackTest.collider != null)
+        {
+            attackTest.collider.GetComponent<Ball>().Launch(myPlayer.getFlipped());
+        }
+        attackCooldownCount = attackCooldown;
+        //myAnimator.SetBool("isUppercut", false);
     }
 
 

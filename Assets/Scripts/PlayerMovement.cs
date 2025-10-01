@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         initialMoveSpeed = moveSpeed;
+        isFlipped = true;
     }
 
     private void Update()
