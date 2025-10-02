@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 raySize;
     public float castDistance;
     public LayerMask groundLayer;
+    public LayerMask interactableLayer;
+    public bool isFlipped;
 
     private void Awake()
     {
@@ -33,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         initialMoveSpeed = moveSpeed;
+        isFlipped = true;
     }
 
     private void Update()
@@ -79,36 +82,29 @@ public class PlayerMovement : MonoBehaviour
         if(move > 0)
         {
             myRenderer.flipX = false;
+            isFlipped = false;
+
         }
         else if(move < 0)
         {
             myRenderer.flipX = true;
+            isFlipped = true;
         }
     }
 
     private void FixedUpdate()
     {
-        //if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
-        //{
-        //    body.AddForce(movementInput * moveSpeed * Time.fixedDeltaTime, ForceMode2D.Force);
-        //}
-
         if(movementInput.magnitude > 0 || movementInput.magnitude < 0)
             body.AddForce(movementInput * moveSpeed, ForceMode2D.Force);
-
-        //if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
-        //{
-        //    body.AddForce(movementInput * moveSpeed * Time.fixedDeltaTime, ForceMode2D.Force);
-        //}
     }
 
     public bool isGrounded()
     {
-        if(Physics2D.BoxCast(transform.position, raySize, 0, -transform.up, castDistance, groundLayer))
+        if(Physics2D.BoxCast(transform.position, raySize, 0, -transform.up, castDistance, groundLayer) || Physics2D.BoxCast(transform.position, raySize, 0, -transform.up, castDistance, interactableLayer))
         {
             return true;
         }
-        
+
         else
         {
             return false;
@@ -132,6 +128,8 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(duration);
         knockedBack = false;
     }
+
+    public bool getFlipped() { return isFlipped; }
 
 
     //private void OnCollisionEnter2D(Collision2D collision)
