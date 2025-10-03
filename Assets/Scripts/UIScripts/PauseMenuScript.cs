@@ -4,17 +4,20 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuScript : MonoBehaviour
 {
+    //sets pauseMenu as canvas overlay
     public GameObject pauseMenu;
     public static bool isPaused;
 
     void Start()
     {
+        //turns off pause menu when game is started
         pauseMenu.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //if Escape is pressed, game pauses. If already paused, unpauses game
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -28,6 +31,7 @@ public class PauseMenuScript : MonoBehaviour
         }
     }
 
+    //turns off game time, which stops everything while game is paused.
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
@@ -35,6 +39,7 @@ public class PauseMenuScript : MonoBehaviour
         isPaused = true;
     }
 
+    //resumes game time, which allows everything to start up again
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
@@ -42,6 +47,7 @@ public class PauseMenuScript : MonoBehaviour
         isPaused = false;
     }
 
+    //button to allow user to return to main menu
     public void GoToMainMenu(int sceneNumber)
     {
         Time.timeScale = 1f;
