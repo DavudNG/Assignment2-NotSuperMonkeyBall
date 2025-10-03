@@ -12,6 +12,8 @@ TagManager:
   - Human
   - Ball
   - Background
+  - Apple
+  - Despawner
   layers:
   - Default
   - TransparentFX

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 13d9829c4e690f64d87d0e1913aa1b1a
+guid: d8f7eb14151aa4942824936441fc270f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3349391187094723686
-    second: Cloud_0
+      213: -9109221071614218766
+    second: Screenshot 2025-10-03 002740_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cloud_0
+      name: Screenshot 2025-10-03 002740_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 9
-        width: 32
-        height: 17
+        y: 0
+        width: 434
+        height: 407
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 66cda90f98d6b7e20800000000000000
-      internalID: 3349391187094723686
+      spriteID: 2fd6ee5b2bb859180800000000000000
+      internalID: -9109221071614218766
       vertices: []
       indices: 
       edges: []
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Cloud_0: 3349391187094723686
+      Screenshot 2025-10-03 002740_0: -9109221071614218766
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
