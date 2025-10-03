@@ -4,6 +4,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     private Rigidbody2D rb;
+    //bool to check if ball is frozen and for how long..
     private bool frozen = false;
     private float frozenTime = 0f;
 
@@ -27,6 +28,7 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
+        //if the ball is frozen, stays frozen for set time. After time is up it unfreezes.
         if (frozen)
         {
             frozenTime -= Time.deltaTime;
@@ -103,8 +105,10 @@ public class Ball : MonoBehaviour
         
     }
 
+    //method to freeze ball
     public void Freeze(float time)
     {
+        //method sets ball velocity to 0 so it cant move for a short period.
         if (frozen) return;
 
         frozen = true;
@@ -116,6 +120,7 @@ public class Ball : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
+    //method to unfreeze ball
     private void Unfreeze()
     {
         frozen = false;
