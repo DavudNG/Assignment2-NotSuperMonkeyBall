@@ -1,5 +1,7 @@
 using NUnit.Framework;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Ball : MonoBehaviour
 {
@@ -16,13 +18,18 @@ public class Ball : MonoBehaviour
     public float kickStrength;
     public float launchStrength;
     public float torqueStr;
-    
+
+    public SpriteRenderer myRenderer;
+    private Coroutine _hitFlashCorotine;
+    private Color origColor;
+    public float flashTime;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         ogConstraints = rb.constraints;
-
+        origColor = myRenderer.color;
     }
 
 
@@ -55,7 +62,6 @@ public class Ball : MonoBehaviour
             }
                 
             isKicked = false;
-            Debug.Log(isKicked);
         }
 
         if (isLaunched)
@@ -87,6 +93,7 @@ public class Ball : MonoBehaviour
             isReversed = false; 
         }
 
+        CallHitFlash();
         isLaunched = true;
     }
 
@@ -101,8 +108,27 @@ public class Ball : MonoBehaviour
             isReversed = false;
         }
 
+        CallHitFlash();
         isKicked = true;
-        
+    }
+
+    public void CallHitFlash()
+    {
+        _hitFlashCorotine = StartCoroutine(hitFlasher());
+    }
+
+    private IEnumerator hitFlasher()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < flashTime)
+        {
+            elapsedTime += Time.deltaTime;
+
+            Color lerpedColor = Color.Lerp(new Color(255, 144, 129), origColor, elapsedTime / flashTime);
+            myRenderer.color = lerpedColor;
+            yield return null;
+        }
     }
 
     //method to freeze ball
