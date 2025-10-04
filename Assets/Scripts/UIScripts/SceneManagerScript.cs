@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagerScript : MonoBehaviour
 {
+    //each method is used in a button to load its specific scene number.
     public void LoadSelectLevel(int sceneNumber)
     {
         SceneManager.LoadScene(1);

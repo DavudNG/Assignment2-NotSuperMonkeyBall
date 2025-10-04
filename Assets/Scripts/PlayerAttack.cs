@@ -19,8 +19,6 @@ public class PlayerAttack : MonoBehaviour
     public LayerMask InteractableLayer;
     public Vector2 raySize;
     public float castDistance;
-
-    private Vector2 myFacing;
     public float fOffset;
     
 
@@ -49,22 +47,6 @@ public class PlayerAttack : MonoBehaviour
             }
         }
 
-        //if (isAttacking)
-        //{
-        //    attackTimer -= Time.deltaTime;
-        //}
-        //
-        //if (attackTimer <= 0)
-        //{
-        //    isAttacking = false;
-        //}
-
-        //if (attackCooldownCount <= attackCooldown && !isAttacking)
-        //{
-        //    isAttackReady = true;
-        //}
-
-
 
         if (attackCooldownCount <= 0)
         {
@@ -80,10 +62,9 @@ public class PlayerAttack : MonoBehaviour
     {
         RaycastHit2D attackTest;
         attackTimer = attackTimerMax;
-        //isAttacking = true;
 
         myAnimator.SetBool("isKick", false);
-        if (myPlayer.getFlipped() == false)
+        if (myPlayer.GetFlipped() == false)
         {
             this.transform.position = new Vector2(AttackHitbox.position.x + fOffset, this.transform.position.y);
             attackTest = Physics2D.BoxCast(new Vector2(AttackHitbox.position.x + fOffset, AttackHitbox.position.y), raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
@@ -98,23 +79,19 @@ public class PlayerAttack : MonoBehaviour
             
         if(attackTest.collider != null)
         {
-            attackTest.collider.GetComponent<Ball>().Kick(myPlayer.getFlipped());
+            attackTest.collider.GetComponent<Ball>().Kick(myPlayer.GetFlipped());
         }
         attackCooldownCount = attackCooldown;
-        //myAnimator.SetBool("isKick", false);
     }
 
     public void Attack2()
     {
         RaycastHit2D attackTest;
         attackTimer = attackTimerMax;
-        //isAttacking = true;
         myAnimator.SetBool("isUppercut", false);
 
-        if (myPlayer.getFlipped() == false)
+        if (myPlayer.GetFlipped() == false)
         {
-            //attackTest = Physics2D.BoxCast(AttackHitbox.position, raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
-            //this.transform.position = new Vector2(AttackHitbox.position.x, this.transform.position.y);
             this.transform.position = new Vector2(AttackHitbox.position.x + fOffset, this.transform.position.y);
             myRenderer.flipX = false;
             attackTest = Physics2D.BoxCast(new Vector2(AttackHitbox.position.x + fOffset, AttackHitbox.position.y), raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
@@ -122,8 +99,6 @@ public class PlayerAttack : MonoBehaviour
 
         else
         {
-            //attackTest = Physics2D.BoxCast(new Vector2 (AttackHitbox.position.x + fOffset, AttackHitbox.position.y), raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
-            //this.transform.position = new Vector2(AttackHitbox.position.x + fOffset, this.transform.position.y);
             this.transform.position = new Vector2(AttackHitbox.position.x, this.transform.position.y);
             myRenderer.flipX = true;
             attackTest = Physics2D.BoxCast(AttackHitbox.position, raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
@@ -131,10 +106,9 @@ public class PlayerAttack : MonoBehaviour
 
         if (attackTest.collider != null)
         {
-            attackTest.collider.GetComponent<Ball>().Launch(myPlayer.getFlipped());
+            attackTest.collider.GetComponent<Ball>().Launch(myPlayer.GetFlipped());
         }
         attackCooldownCount = attackCooldown;
-        //myAnimator.SetBool("isUppercut", false);
     }
 
 

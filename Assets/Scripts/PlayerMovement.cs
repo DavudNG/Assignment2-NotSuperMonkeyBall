@@ -1,31 +1,25 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Threading;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D body;
-    [SerializeField] public float moveSpeed;
-    private float initialMoveSpeed;
-    [SerializeField] public float jumpForce;
-    //public bool touchingGround = false;
-    public bool debugGroundCheck;
+    public float moveSpeed;
+    public float jumpForce;
     private float knockbackTimer;
     private bool knockedBack;
 
     public SpriteRenderer myRenderer;
     public Animator myAnimator;
+    public ParticleSystem myParticleSystem;
+
     private Vector2 movementInput;
     public Vector2 raySize;
     public float castDistance;
     public LayerMask groundLayer;
     public LayerMask interactableLayer;
     public bool isFlipped;
+    public int emitCount;
 
     private void Awake()
     {
@@ -34,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        initialMoveSpeed = moveSpeed;
         isFlipped = true;
     }
 
@@ -44,39 +37,18 @@ public class PlayerMovement : MonoBehaviour
         
         if (!knockedBack)
         {
-           //if (int.TryParse(ReadWrite.ReturnAttribute("isSlippery"), out _))
-           //{
-           //    float move = Input.GetAxisRaw("Horizontal");
-           //    body.AddForce(new Vector2(move * int.Parse(ReadWrite.ReturnAttribute("isSlippery")), 0));
-           //}
-           // else
-           // {
+            movementInput = new Vector2(move, 0);
                 
-                //body.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * moveSpeed, body.linearVelocity.y);
-
-                //if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
-                //{
-                //    movementInput = new Vector2(moveSpeed,0);
-                //}
-                //
-                //if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
-                //{
-                //    // body.AddForce(new Vector2(-moveSpeed, 0), ForceMode2D.Force);
-                //    movementInput = new Vector2(-moveSpeed,0);
-                //}
-                movementInput = new Vector2(move, 0);
-                
-           // }
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
             {
                 body.linearVelocity = new Vector2(body.linearVelocity.x, jumpForce);
-                //touchingGround = false;
+                StopParticleEffect();
+                PlayParticleEffect();
             }
 
             myAnimator.SetFloat("speed", Mathf.Abs(movementInput.x));
             myAnimator.SetFloat("vertical_speed", body.linearVelocity.y);
             myAnimator.SetBool("grounded", isGrounded());
-            debugGroundCheck = isGrounded();
         }
         
         if(move > 0)
@@ -111,6 +83,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public bool GetFlipped() { return isFlipped; }
+
+    public void PlayParticleEffect()
+    {
+        //if(isGrounded())
+            myParticleSystem.Emit(emitCount);
+    }
+
+    public void StopParticleEffect()
+    {
+        myParticleSystem.Stop();
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position - transform.up * castDistance, raySize);
@@ -128,33 +113,4 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(duration);
         knockedBack = false;
     }
-
-    public bool getFlipped() { return isFlipped; }
-
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Ball"))
-    //    {
-    //        touchingGround = true;
-    //    }
-
-    //    if (ReadWrite.CheckAttribute("isSlowed"))
-    //    {
-    //        moveSpeed = initialMoveSpeed / 4;
-    //        Debug.Log("new movespeed: " + moveSpeed.ToString());
-    //    }
-    //    else
-    //    {
-    //        moveSpeed = initialMoveSpeed;
-    //    }
-    //}
-    
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Ball"))
-    //    {
-    //        touchingGround = false;
-    //    }
-    //} 
 }
