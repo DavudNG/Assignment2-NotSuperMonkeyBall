@@ -20,12 +20,16 @@ public class PlayerHealth : MonoBehaviour
     public void takeDamage() {
 
         // If the player has more than  0 health administer damage
-        if (health > 0){
+        if (health-1 >= 1)
+        {
             health -= 1;
             Debug.Log("Player Health: " + health);
-        } else {
+        }
+        else
+        {
             Debug.Log("Player dead!");
-            // Player died
+            DeathMenuScript deathMenu = FindObjectOfType<DeathMenuScript>();
+            deathMenu.DisplayDeathScreen();
         }
     }
 }
