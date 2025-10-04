@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask interactableLayer;
     public bool isFlipped;
     public int emitCount;
+    private bool stopPlaying = false;
 
     private void Awake()
     {
@@ -30,9 +31,24 @@ public class PlayerMovement : MonoBehaviour
     {
         isFlipped = true;
     }
+    
+    // I need this coroutine because if it is deleted then the walk sound will play 150 times every second
+    IEnumerator soundCoroutine()
+    {
+        stopPlaying = true;
+        yield return new WaitForSeconds(0.6f);
+        stopPlaying = false;
+    }
 
     private void Update()
     {
+        // While the player is grounded and moving (aka key press) and the sound is not on cooldown then play another.
+        if (this.isGrounded() && Input.anyKey && !stopPlaying)
+        {
+            SoundManager.PlaySound(SoundType.WALK);
+            StartCoroutine(soundCoroutine());
+        }
+
         float move = Input.GetAxis("Horizontal");
         
         if (!knockedBack)
