@@ -1,3 +1,4 @@
 isSlowed=true
 isSlippery=false
 isMoonGrav=false
+isColourblind=false
