@@ -34,5 +34,15 @@ public class SceneManagerScript : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void reset()
+    {
+        // This method is used to reset all PlayerPrefs, including level progress and high scores
+        // This is useful for testing purposes to ensure that the game behaves as expected from a fresh state
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+        Debug.Log("PlayerPrefs have been reset.");
+        SceneManager.LoadScene(1);
+    }
+
 
 }

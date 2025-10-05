@@ -6,6 +6,7 @@ public class FinishFlag : MonoBehaviour
     void Start()
     {
         // Don't need this
+        Debug.Log(Application.persistentDataPath);
     }
 
     // Update is called once per frame
@@ -24,8 +25,11 @@ public class FinishFlag : MonoBehaviour
         // If the rigid body comes from the Ball then the level is complete
         if (rb != null && other.CompareTag("Ball"))
         {
+            // We need to read the players score at the time of collision
+            int score = (int)FindObjectOfType<LevelTimerScript>().currentTime;
             FinishLevelScript finishLevel = FindObjectOfType<FinishLevelScript>();
-            finishLevel.DisplayFinishLevelScreen();
+            Debug.Log("Level Complete! Score: " + score);
+            finishLevel.DisplayFinishLevelScreen(score, UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
