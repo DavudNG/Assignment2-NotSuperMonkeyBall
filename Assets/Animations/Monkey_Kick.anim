@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Uppercut
+  m_Name: Monkey_Kick
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,23 +21,25 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: 05e45fa390165044d84746bd88e62644, type: 3}
+      value: {fileID: 21300000, guid: 1a5d560dbaa07624ea7e0067ea4b68a4, type: 3}
+    - time: 0.083333336
+      value: {fileID: 21300000, guid: 793f54dd0e8ef944d903c723e1931fb5, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: 5037a00a7de08e14e91d0fa27c2f190a, type: 3}
+      value: {fileID: 21300000, guid: c56c3d2bd0091a34ba92aefdb36a3c08, type: 3}
+    - time: 0.25
+      value: {fileID: 21300000, guid: f4d767838081701409033cdf2c3e5708, type: 3}
     - time: 0.33333334
-      value: {fileID: 21300000, guid: aa49e3dec1aecd5418918d1293c14640, type: 3}
+      value: {fileID: 21300000, guid: a37c2e2be3c70f94ba9bd71cfe9c45d4, type: 3}
+    - time: 0.41666666
+      value: {fileID: 21300000, guid: de89f66b98db0ca479967787a05a46f9, type: 3}
     - time: 0.5
-      value: {fileID: 21300000, guid: c93e67855ff8c4b479702f37b7bd9880, type: 3}
+      value: {fileID: 21300000, guid: fbcb27562466b9b4b994390e7f49c14b, type: 3}
+    - time: 0.5833333
+      value: {fileID: 21300000, guid: 5be53830bfb88374fb082cc8bab86db9, type: 3}
     - time: 0.6666667
-      value: {fileID: 21300000, guid: 2bd52a9b93cfc704dbd312fdef8dc432, type: 3}
-    - time: 0.8333333
-      value: {fileID: 21300000, guid: a4338ef4c5e87614dbc0bfe8e3b6542d, type: 3}
-    - time: 1
-      value: {fileID: 21300000, guid: 222b4e74254d0c944ac2234341f22cd1, type: 3}
-    - time: 1.1666666
-      value: {fileID: 21300000, guid: 71635278ff130dc4a8d9c7be66e5ae24, type: 3}
-    - time: 1.3333334
-      value: {fileID: 21300000, guid: 69a3d46f4e2591748a39178718cff1ca, type: 3}
+      value: {fileID: 21300000, guid: 1c75198ccfeaa1243adc1e482a0d981f, type: 3}
+    - time: 0.75
+      value: {fileID: 21300000, guid: 7083b9c2676b27b4696a0f80fcf4a5ba, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -60,21 +62,22 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 05e45fa390165044d84746bd88e62644, type: 3}
-    - {fileID: 21300000, guid: 5037a00a7de08e14e91d0fa27c2f190a, type: 3}
-    - {fileID: 21300000, guid: aa49e3dec1aecd5418918d1293c14640, type: 3}
-    - {fileID: 21300000, guid: c93e67855ff8c4b479702f37b7bd9880, type: 3}
-    - {fileID: 21300000, guid: 2bd52a9b93cfc704dbd312fdef8dc432, type: 3}
-    - {fileID: 21300000, guid: a4338ef4c5e87614dbc0bfe8e3b6542d, type: 3}
-    - {fileID: 21300000, guid: 222b4e74254d0c944ac2234341f22cd1, type: 3}
-    - {fileID: 21300000, guid: 71635278ff130dc4a8d9c7be66e5ae24, type: 3}
-    - {fileID: 21300000, guid: 69a3d46f4e2591748a39178718cff1ca, type: 3}
+    - {fileID: 21300000, guid: 1a5d560dbaa07624ea7e0067ea4b68a4, type: 3}
+    - {fileID: 21300000, guid: 793f54dd0e8ef944d903c723e1931fb5, type: 3}
+    - {fileID: 21300000, guid: c56c3d2bd0091a34ba92aefdb36a3c08, type: 3}
+    - {fileID: 21300000, guid: f4d767838081701409033cdf2c3e5708, type: 3}
+    - {fileID: 21300000, guid: a37c2e2be3c70f94ba9bd71cfe9c45d4, type: 3}
+    - {fileID: 21300000, guid: de89f66b98db0ca479967787a05a46f9, type: 3}
+    - {fileID: 21300000, guid: fbcb27562466b9b4b994390e7f49c14b, type: 3}
+    - {fileID: 21300000, guid: 5be53830bfb88374fb082cc8bab86db9, type: 3}
+    - {fileID: 21300000, guid: 1c75198ccfeaa1243adc1e482a0d981f, type: 3}
+    - {fileID: 21300000, guid: 7083b9c2676b27b4696a0f80fcf4a5ba, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.35
+    m_StopTime: 0.76666665
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -95,7 +98,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: Attack2
+    functionName: Attack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

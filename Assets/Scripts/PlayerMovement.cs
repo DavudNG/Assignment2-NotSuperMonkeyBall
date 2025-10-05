@@ -32,7 +32,10 @@ public class PlayerMovement : MonoBehaviour
         isFlipped = true;
     }
     
-    // I need this coroutine because if it is deleted then the walk sound will play 150 times every second
+    /*
+        James:
+        I need this coroutine because if it is deleted then the walk sound will play 150 times every second
+    */
     IEnumerator soundCoroutine()
     {
         stopPlaying = true;
