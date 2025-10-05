@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour
 {
     private Rigidbody2D rb; // Ref to the rigidbody of the ball
     //bool to check if ball is frozen and for how long..
-    public bool frozen = false;
+    private bool frozen = false;
     private float frozenTime = 0f;
 
     private RigidbodyConstraints2D ogConstraints;
@@ -47,26 +47,20 @@ public class Ball : MonoBehaviour
         //if the ball is frozen, stays frozen for set time. After time is up it unfreezes.
         if (frozen)
         {
-            myRenderer.color = new Color(0.2157f, 0.4431f, 1f);
             frozenTime -= Time.deltaTime;
             if (frozenTime <= 0)
             {
                 Unfreeze();
-                myRenderer.color = origColor;
             }
-        }
-        else
-        {
-            myRenderer.color = origColor;
         }
     }
 
     private void FixedUpdate()
     {
         // logic for when the ball is in kicked state
-        if (isKicked) // when kicked state is true
+        if(isKicked) // when kicked state is true
         {
-            SoundManager.PlaySound(SoundType.HIT);
+            SoundManager.PlaySound(SoundType.HIT); // Plays the "hit" sound once when kicking the ball
             if (isReversed)
             {
                 this.rb.AddForce(new Vector2(-kickStrength, 0), ForceMode2D.Force); // apply backward force to the ball according to kick str
@@ -75,14 +69,14 @@ public class Ball : MonoBehaviour
             {
                 this.rb.AddForce(new Vector2(kickStrength, 0), ForceMode2D.Force); // apply forward force to the ball according to kick str
             }
-
+                
             isKicked = false; // reset the kicked state
         }
 
         // logic for when the ball is in launched state
         if (isLaunched) // when launched state is true
         {
-            SoundManager.PlaySound(SoundType.LAUNCH);
+            SoundManager.PlaySound(SoundType.LAUNCH); // Plays the "launch" sound once when kicking the ball
             if (isReversed)
             {
                 this.rb.AddForce(new Vector2(-kickStrength, launchStrength), ForceMode2D.Force); // apply backward force to the ball according to kick str and upwards force according to launch str 
@@ -133,7 +127,7 @@ public class Ball : MonoBehaviour
     {
         _hitFlashCorotine = StartCoroutine(HitFlasher()); // starts the coroutine and sets the reference to it
     }
-
+    
     /*
         HitFlasher() 
         Author: David
@@ -183,15 +177,5 @@ public class Ball : MonoBehaviour
         frozen = false;
 
         rb.constraints = ogConstraints;
-    }
-
-    /*
-        IsFrozen() 
-        Author: Julian
-        Desc: method that returns bool of ball frozen status
-    */
-    public bool Isfrozen()
-    {
-        return frozen;
     }
 }

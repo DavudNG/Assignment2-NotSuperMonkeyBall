@@ -36,7 +36,7 @@ public class PlayerHealth : MonoBehaviour
         // If the player has more than  0 health administer damage
         if (health-1 >= 1)
         {
-            SoundManager.PlaySound(SoundType.HURT);
+            SoundManager.PlaySound(SoundType.HURT); // Play the getting hurt sound if the player takes damage but does not die
             health -= 1;
             Debug.Log("Player Health: " + health);
             CallHitFlash(); // call hitflash coroutine

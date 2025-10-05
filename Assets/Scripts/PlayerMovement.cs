@@ -1,6 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
+/*
+    PlayerMovement.cs     
+    Co-Authors: James & David
+
+    Desc: This script outlines the player's movement, and other functions that affect it.
+*/
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D body;
@@ -20,11 +26,11 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask interactableLayer;
     public bool isFlipped;
     public int emitCount;
-    private bool stopPlaying = false;
+    private bool stopPlaying = false; // Bool to ensure only 1 walk sound plays at a single time
 
     private void Awake()
     {
-        body = GetComponent<Rigidbody2D>();
+        body = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D of the player to allow for movement functionality
     }
 
     void Start()
@@ -38,9 +44,9 @@ public class PlayerMovement : MonoBehaviour
     */
     IEnumerator soundCoroutine()
     {
-        stopPlaying = true;
-        yield return new WaitForSeconds(0.6f);
-        stopPlaying = false;
+        stopPlaying = true; // Variable to ensure only 1 walking sound plays at a single time
+        yield return new WaitForSeconds(0.6f); // Wait for 0.6 seconds between walking sounds because otherwise the sounds will overlap and not sound good
+        stopPlaying = false; // Setting of the variable to false to let it be known that another walking sound can be played
     }
 
     private void Update()
@@ -48,19 +54,19 @@ public class PlayerMovement : MonoBehaviour
         // While the player is grounded and moving (aka key press) and the sound is not on cooldown then play another.
         if (this.isGrounded() && Input.anyKey && !stopPlaying)
         {
-            SoundManager.PlaySound(SoundType.WALK);
-            StartCoroutine(soundCoroutine());
+            SoundManager.PlaySound(SoundType.WALK); // Play the walk sound if a button is pressed while the character is grounded and a walk sound is not already playing
+            StartCoroutine(soundCoroutine()); // Start the walk sound coroutine to ensure only 1 plays at a time
         }
 
         float move = Input.GetAxis("Horizontal");
 
-        if (!knockedBack)
+        if (!knockedBack) // If not currently getting knocked back (getting knocked back disables movement for a time period)
         {
             movementInput = new Vector2(move, 0);
 
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
             {
-                SoundManager.PlaySound(SoundType.JUMP);
+                SoundManager.PlaySound(SoundType.JUMP); // Play the jump sound when jumping
                 body.linearVelocity = new Vector2(body.linearVelocity.x, jumpForce);
                 StopParticleEffect();
                 PlayParticleEffect();
@@ -121,21 +127,21 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawWireCube(transform.position - transform.up * castDistance, raySize);
     }
 
-    public void Explode(Vector2 force, float duration)
+    public void Explode(Vector2 force, float duration) // Public method that other objects can call on collision to trigger an "explosion"
     {
-        StartCoroutine(ExplodeCoroutine(force, duration));
+        StartCoroutine(ExplodeCoroutine(force, duration)); // Start the explosion coroutine to disable movement for a time period
     }
 
-    private IEnumerator ExplodeCoroutine(Vector2 force, float duration)
+    private IEnumerator ExplodeCoroutine(Vector2 force, float duration) // Explosion coroutine called by the Explode method
     {
-        knockedBack = true;
-        body.AddForce(force, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(duration);
-        knockedBack = false;
+        knockedBack = true; // knockedBack set to true disables movement
+        body.AddForce(force, ForceMode2D.Impulse); // Adds a force to the player to "explode" them away
+        yield return new WaitForSeconds(duration); // Wait for a selected amount of time
+        knockedBack = false; // Enable player movement again by setting knockedBack back to false after the time period has elapsed
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision) // When the player collides with another object
     {
-        SoundManager.PlaySound(SoundType.LAND);
+        SoundManager.PlaySound(SoundType.LAND); // Play the "land" sound effect (most of the time the player collides with something, it is the ground)
     }
 }
