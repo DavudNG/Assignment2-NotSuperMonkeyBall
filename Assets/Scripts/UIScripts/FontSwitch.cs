@@ -15,7 +15,12 @@ public class FontSwitch : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        tmp = GetComponent<TextMeshProUGUI>();
+        tmp = this.GetComponent<TextMeshProUGUI>();
+    }
+
+    void Start()
+    {
+        ApplyFont(); // Apply the correct font when the object is first created
     }
 
     // Update is called once per frame
