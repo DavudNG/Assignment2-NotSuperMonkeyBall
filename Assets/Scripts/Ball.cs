@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour
 {
     private Rigidbody2D rb; // Ref to the rigidbody of the ball
     //bool to check if ball is frozen and for how long..
-    private bool frozen = false;
+    public bool frozen = false;
     private float frozenTime = 0f;
 
     private RigidbodyConstraints2D ogConstraints;
