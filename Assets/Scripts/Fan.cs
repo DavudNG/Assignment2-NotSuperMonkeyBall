@@ -8,7 +8,6 @@ public class Fan : MonoBehaviour
     // This is the direction that the fan will blow towards
     public Vector2 fanDirection = new Vector2(1, 0);
 
-    // This function is called when a collider enters the trigger area of the fan's box collider 2d
     private void OnTriggerStay2D(Collider2D other)
     {
         // This line gets the other rigidbody2d component of the object that entered the trigger area
