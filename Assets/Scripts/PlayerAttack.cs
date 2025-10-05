@@ -3,24 +3,29 @@ using UnityEngine;
 /*
     PlayerAttack.cs     
     Author: David
-    Desc: This script handles the players attack and collision check logic, particle effects and rendering of thr attack animation.
+
+    Desc: This script handles the ball's logic such as when it is hit 
+        by the player, the hitflash and being frozen
 */
 public class PlayerAttack : MonoBehaviour
 {
     public PlayerMovement myPlayer; // Ref to the player 
     public Transform AttackHitbox; // Ref to the transform 
-    public Animator myAnimator; // Ref to the animator of the attackanimation 
-    public SpriteRenderer myRenderer; // Ref to the renderer of the attackanimation
+    public Animator myAnimator; // Ref to the animator of the ball 
+    public SpriteRenderer myRenderer; // Ref to the renderer of the ball
 
     public bool isAttackReady; // Bool to check whether the player is ready to atk and to stop atks starting if it isnt
 
-    private float attackCooldownCount; // The current attack cooldown timer
-    public float attackCooldown; // The max attack cooldown timer
+    public float attackCooldownCount; // 
+    public float attackCooldown; // 
     
-    public LayerMask InteractableLayer; // Reference to the target interactable layer to check for 
-    public Vector2 raySize; // Vector2 box size to raycast
-    public float castDistance; // Float that determines how far to start the cast from the origin
-    public float fOffset; // Float that determines how much offset to add for the collision check
+    public float attackTimer; // 
+    public float attackTimerMax; // 
+
+    public LayerMask InteractableLayer; // 
+    public Vector2 raySize; // 
+    public float castDistance; // float that determines how far to cast 
+    public float fOffset; // float that determines how much offset to add for the collision check
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,104 +37,88 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isAttackReady) // check if atk ready is true
+        if (isAttackReady)
         {
-            if (Input.GetKeyDown(KeyCode.Q)) // when Q is pressed
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                myRenderer.flipX = false; // flips the renderer back to default 
-                myAnimator.SetBool("isKick", true); // sets the kick parameter to control the player animator statemachine
-                isAttackReady = false; // set flag for atk ready to false
+                myRenderer.flipX = false;
+                myAnimator.SetBool("isKick", true);
+                isAttackReady = false;
             }
 
-            if (Input.GetKeyDown(KeyCode.E)) // When E is pressed 
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                myAnimator.SetBool("isUppercut", true); // sets the uppercut parameter to control the player animator statemachine
-                isAttackReady = false; // set flag for atk ready to false
+                myAnimator.SetBool("isUppercut", true);
+                isAttackReady = false;
             }
         }
 
 
-        if (attackCooldownCount <= 0) // if the atk cooldown is 0 or less
+        if (attackCooldownCount <= 0)
         {
-            isAttackReady = true; // flag that atk is ready
+            isAttackReady = true;
         }
-        else // otherwise decrement the timer
+        else
         {
-            attackCooldownCount -= Time.deltaTime; // decrement the count 
+            attackCooldownCount -= Time.deltaTime;
         }
     }
 
-    /*
-        Attack() 
-        Author: David
-        Desc: function for the kick action, sets the flag for animator state and ray casts forward or backward based on facing, 
-        calls the kick function on objects hit with the raycast if any. 
-    */
     public void Attack()
     {
-        RaycastHit2D attackTest; // make a list of things hit by the raycast 
+        RaycastHit2D attackTest;
+        attackTimer = attackTimerMax;
 
-        myAnimator.SetBool("isKick", false);  // set the animator's kick parameter back to false to exit the animation
-
-        //note: could refactor this to check in front of the player only if the movement script was changed to
-        //      actually rotate the player facing and not just the sprite
-
-        if (myPlayer.GetFlipped() == false) // if the player isnt flipped
+        myAnimator.SetBool("isKick", false);
+        if (myPlayer.GetFlipped() == false)
         {
-            this.transform.position = new Vector2(AttackHitbox.position.x + fOffset, this.transform.position.y); // change the location of the ray cast box origin
-            attackTest = Physics2D.BoxCast(new Vector2(AttackHitbox.position.x + fOffset, AttackHitbox.position.y), raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer); // ray cast backward and store the result
+            this.transform.position = new Vector2(AttackHitbox.position.x + fOffset, this.transform.position.y);
+            attackTest = Physics2D.BoxCast(new Vector2(AttackHitbox.position.x + fOffset, AttackHitbox.position.y), raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
         }
-
-        else // otherwise it is flipped then
+        
+        else
         {
-            this.transform.position = new Vector2(AttackHitbox.position.x , this.transform.position.y); // change the location of the ray cast box origin
-            myRenderer.flipX = true; // flip the sprite
-            attackTest = Physics2D.BoxCast(AttackHitbox.position, raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer); // ray cast forward and store the result 
+            this.transform.position = new Vector2(AttackHitbox.position.x , this.transform.position.y);
+            myRenderer.flipX = true;
+            attackTest = Physics2D.BoxCast(AttackHitbox.position, raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
         }
             
-        if(attackTest.collider != null) // when the list isnt empty
+        if(attackTest.collider != null)
         {
-            attackTest.collider.GetComponent<Ball>().Kick(myPlayer.GetFlipped()); //call kick method from objects in the list
+            attackTest.collider.GetComponent<Ball>().Kick(myPlayer.GetFlipped());
         }
-        attackCooldownCount = attackCooldown; // set the cooldown count to the max cooldown 
+        attackCooldownCount = attackCooldown;
     }
 
-    /*
-        Attack2() 
-        Author: David
-        Desc: function for the launch action, sets the animator parameter, checks whether the player is flipped, performs a ray cast and 
-        calls launch on objects hit.
-    */
     public void Attack2()
     {
-        RaycastHit2D attackTest; // make a list of things hit by the raycast 
-        myAnimator.SetBool("isUppercut", false); // set the animator's uppercut flag to false to exit the animation
+        RaycastHit2D attackTest;
+        attackTimer = attackTimerMax;
+        myAnimator.SetBool("isUppercut", false);
 
-        //note: could refactor this to check in front of the player only if the movement script was changed to
-        //      actually rotate the player facing and not just the sprite.
-        if (myPlayer.GetFlipped() == false) // if the player isnt flipped
+        if (myPlayer.GetFlipped() == false)
         {
-            this.transform.position = new Vector2(AttackHitbox.position.x + fOffset, this.transform.position.y); // change the location of the ray cast box origin
-            myRenderer.flipX = false; // set the attack animation renderer's flip flag to false
-            attackTest = Physics2D.BoxCast(new Vector2(AttackHitbox.position.x + fOffset, AttackHitbox.position.y), raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer); // ray cast backward and store the result
+            this.transform.position = new Vector2(AttackHitbox.position.x + fOffset, this.transform.position.y);
+            myRenderer.flipX = false;
+            attackTest = Physics2D.BoxCast(new Vector2(AttackHitbox.position.x + fOffset, AttackHitbox.position.y), raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
         }
 
-        else // otherwise it is flipped then
+        else
         {
-            this.transform.position = new Vector2(AttackHitbox.position.x, this.transform.position.y); // change the location of the ray cast box origin back to normal
-            myRenderer.flipX = true; // // set the attack animation renderer's flip flag to false
-            attackTest = Physics2D.BoxCast(AttackHitbox.position, raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer); // ray cast forward and store the result
+            this.transform.position = new Vector2(AttackHitbox.position.x, this.transform.position.y);
+            myRenderer.flipX = true;
+            attackTest = Physics2D.BoxCast(AttackHitbox.position, raySize, 0, AttackHitbox.forward, castDistance, InteractableLayer);
         }
 
-        if (attackTest.collider != null) // when the list isnt empty 
+        if (attackTest.collider != null)
         {
-            attackTest.collider.GetComponent<Ball>().Launch(myPlayer.GetFlipped()); // call launch method from objects in the list
+            attackTest.collider.GetComponent<Ball>().Launch(myPlayer.GetFlipped());
         }
-        attackCooldownCount = attackCooldown; // reset the cooldown to max
+        attackCooldownCount = attackCooldown;
     }
 
 
-    // quick OnDrawGizmo function to check the sizes of the raycasts 
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(AttackHitbox.position - AttackHitbox.forward * castDistance, raySize); 
