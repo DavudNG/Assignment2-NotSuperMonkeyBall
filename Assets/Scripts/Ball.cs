@@ -60,7 +60,8 @@ public class Ball : MonoBehaviour
         // logic for when the ball is in kicked state
         if(isKicked) // when kicked state is true
         {
-            if(isReversed) // check if direction needs to be reversed 
+            SoundManager.PlaySound(SoundType.HIT);
+            if (isReversed)
             {
                 this.rb.AddForce(new Vector2(-kickStrength, 0), ForceMode2D.Force); // apply backward force to the ball according to kick str
             }
@@ -75,8 +76,8 @@ public class Ball : MonoBehaviour
         // logic for when the ball is in launched state
         if (isLaunched) // when launched state is true
         {
-            
-            if (isReversed) // check if direction needs to be reversed
+            SoundManager.PlaySound(SoundType.LAUNCH);
+            if (isReversed)
             {
                 this.rb.AddForce(new Vector2(-kickStrength, launchStrength), ForceMode2D.Force); // apply backward force to the ball according to kick str and upwards force according to launch str 
                 this.rb.AddTorque(-torqueStr); // apply torque to make the ball rotate backwards

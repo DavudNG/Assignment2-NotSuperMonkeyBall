@@ -53,13 +53,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         float move = Input.GetAxis("Horizontal");
-        
+
         if (!knockedBack)
         {
             movementInput = new Vector2(move, 0);
-                
+
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
             {
+                SoundManager.PlaySound(SoundType.JUMP);
                 body.linearVelocity = new Vector2(body.linearVelocity.x, jumpForce);
                 StopParticleEffect();
                 PlayParticleEffect();
@@ -69,14 +70,14 @@ public class PlayerMovement : MonoBehaviour
             myAnimator.SetFloat("vertical_speed", body.linearVelocity.y);
             myAnimator.SetBool("grounded", isGrounded());
         }
-        
-        if(move > 0)
+
+        if (move > 0)
         {
             myRenderer.flipX = false;
             isFlipped = false;
 
         }
-        else if(move < 0)
+        else if (move < 0)
         {
             myRenderer.flipX = true;
             isFlipped = true;
@@ -85,13 +86,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(movementInput.magnitude > 0 || movementInput.magnitude < 0)
+        if (movementInput.magnitude > 0 || movementInput.magnitude < 0)
             body.AddForce(movementInput * moveSpeed, ForceMode2D.Force);
     }
 
     public bool isGrounded()
     {
-        if(Physics2D.BoxCast(transform.position, raySize, 0, -transform.up, castDistance, groundLayer) || Physics2D.BoxCast(transform.position, raySize, 0, -transform.up, castDistance, interactableLayer))
+        if (Physics2D.BoxCast(transform.position, raySize, 0, -transform.up, castDistance, groundLayer) || Physics2D.BoxCast(transform.position, raySize, 0, -transform.up, castDistance, interactableLayer))
         {
             return true;
         }
@@ -107,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
     public void PlayParticleEffect()
     {
         //if(isGrounded())
-            myParticleSystem.Emit(emitCount);
+        myParticleSystem.Emit(emitCount);
     }
 
     public void StopParticleEffect()
@@ -131,5 +132,10 @@ public class PlayerMovement : MonoBehaviour
         body.AddForce(force, ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);
         knockedBack = false;
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        SoundManager.PlaySound(SoundType.LAND);
     }
 }
