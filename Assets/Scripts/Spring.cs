@@ -2,18 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    Spring.cs
+    Author: Angus
+    Desc: This script is attached to the spring prefab, launching the player in tthe air upon collision
+        Similarly to the spikes, a cooldown is applied to prevent multiple launches while touching the spring
+        in order to prevent excessive launching
+*/
 public class Spring : MonoBehaviour
 {
-
-    // Make sure the player doesn't get laaunched multiple times while touching the spring
     private bool isJumping = false;
 
+    // This function is called when another collider makes contact with this object's collider
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // This is the object that touched the spring
         GameObject otherObject = collision.gameObject;
-
-        Debug.Log("Spring interacted with by: " + otherObject.name);
 
         // Apply a force if it has a Rigidbody2D and not already jumping
         Rigidbody2D rb = otherObject.GetComponent<Rigidbody2D>();

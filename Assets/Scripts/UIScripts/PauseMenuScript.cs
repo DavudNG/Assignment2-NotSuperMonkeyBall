@@ -42,6 +42,7 @@ public class PauseMenuScript : MonoBehaviour
     //resumes game time, which allows everything to start up again
     public void ResumeGame()
     {
+        Debug.Log("Resume Game");
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;

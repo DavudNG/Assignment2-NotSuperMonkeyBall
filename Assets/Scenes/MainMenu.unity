@@ -1444,8 +1444,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1564126181}
-        m_TargetAssemblyTypeName: SceneManagerScript, Assembly-CSharp
+      - m_Target: {fileID: 1404358555}
+        m_TargetAssemblyTypeName: ToggleBehavior, Assembly-CSharp
         m_MethodName: toggleDyslexiaFont
         m_Mode: 1
         m_Arguments:

@@ -43,9 +43,14 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
+            // The player died
+            // Some useful logging statements
             Debug.Log("Player dead!");
+            // Play a sound indicating the player death
             SoundManager.PlaySound(SoundType.DEATH);
+            // Find the death screen 
             DeathMenuScript deathMenu = FindObjectOfType<DeathMenuScript>();
+            // Display the death screen
             deathMenu.DisplayDeathScreen();
         }
     }

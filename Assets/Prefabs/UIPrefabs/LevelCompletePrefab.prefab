@@ -489,6 +489,7 @@ GameObject:
   - component: {fileID: 2948300570930647205}
   - component: {fileID: 7628325983586213311}
   - component: {fileID: 4153759071123722359}
+  - component: {fileID: 1846486926299579149}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -614,6 +615,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1846486926299579149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4735182160222266873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 599b2b479f0eaac4db2aad19e4b30d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FontSwitch
+  defaultFont: {fileID: 11400000, guid: 411291dbc7be7b246b745f2405f82c9b, type: 2}
+  dyslexiaFont: {fileID: 11400000, guid: 913e610337e27144c91c58976ef68591, type: 2}
 --- !u!1 &4775472144472357975
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +640,7 @@ GameObject:
   - component: {fileID: 645827502800320341}
   - component: {fileID: 5164337464906746806}
   - component: {fileID: 4272369032053929308}
+  - component: {fileID: 2419328765366005223}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -750,6 +766,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2419328765366005223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775472144472357975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 599b2b479f0eaac4db2aad19e4b30d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FontSwitch
+  defaultFont: {fileID: 11400000, guid: 411291dbc7be7b246b745f2405f82c9b, type: 2}
+  dyslexiaFont: {fileID: 11400000, guid: 913e610337e27144c91c58976ef68591, type: 2}
 --- !u!1 &5937624592971764061
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,6 +791,7 @@ GameObject:
   - component: {fileID: 118831129359405914}
   - component: {fileID: 3623349863234922733}
   - component: {fileID: 7451023253480371870}
+  - component: {fileID: 5122395977688519526}
   m_Layer: 5
   m_Name: FinishedText
   m_TagString: Untagged
@@ -888,6 +919,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5122395977688519526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5937624592971764061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 599b2b479f0eaac4db2aad19e4b30d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FontSwitch
+  defaultFont: {fileID: 11400000, guid: 411291dbc7be7b246b745f2405f82c9b, type: 2}
+  dyslexiaFont: {fileID: 11400000, guid: 913e610337e27144c91c58976ef68591, type: 2}
 --- !u!1 &8166703951118608520
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,6 +944,7 @@ GameObject:
   - component: {fileID: 600271575856935792}
   - component: {fileID: 77615912420288384}
   - component: {fileID: 8393664452392945749}
+  - component: {fileID: 6523885378093448974}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1024,3 +1070,17 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6523885378093448974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8166703951118608520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 599b2b479f0eaac4db2aad19e4b30d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FontSwitch
+  defaultFont: {fileID: 11400000, guid: 411291dbc7be7b246b745f2405f82c9b, type: 2}
+  dyslexiaFont: {fileID: 11400000, guid: 913e610337e27144c91c58976ef68591, type: 2}

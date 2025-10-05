@@ -1,17 +1,25 @@
 using UnityEngine;
 using System.Collections;
 
+/*
+    Spikes.cs
+    Author: Angus
+    Desc: This script is attached to the spikes on the level.
+        This script essentially allows the player to get damaged when touching a spike
+        Spikes have a unique hitbox that is a trigger, so we can use OnTriggerEnter2D and OnTriggerExit2D
+    Issue: As the spikes hitboxes are triggers, this code is constantly run while the player is in the hitbox
+        Unfortunately, this means that if the player enters the hitbox at a lower point they may get damaged multiple times
+        before leaving the hitbox. To alleviate this, a cooldown has been applied to this script so that the 
+        player can only get damaged once every 0.5 seconds while touching the spikes.
+        This now means that if tthe ball touches the spikes slighly before the player does, the spikes will lag
+        and the player will not be damaged until re-entering the hitbox.
+
+*/
 public class Spikes : MonoBehaviour
 {
 
     // Is the player getting damaged right now?
     private bool isDamaging = false;
-
-    // We don't need this
-    void Start()
-    {
-
-    }
 
     // Check for any collisions with a rigidbody2d
     private void OnTriggerStay2D(Collider2D other)
@@ -31,8 +39,6 @@ public class Spikes : MonoBehaviour
 
     IEnumerator takeDamage(Collider2D other)
     {
-        Debug.Log("Taking damage");
-
         // Flag that we are damaging the player
         isDamaging = true;
 
