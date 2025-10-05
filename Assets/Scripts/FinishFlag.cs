@@ -28,6 +28,7 @@ public class FinishFlag : MonoBehaviour
             // We need to read the players score at the time of collision
             int score = (int)FindObjectOfType<LevelTimerScript>().currentTime;
             FinishLevelScript finishLevel = FindObjectOfType<FinishLevelScript>();
+            SoundManager.PlaySound(SoundType.WIN);
             Debug.Log("Level Complete! Score: " + score);
             finishLevel.DisplayFinishLevelScreen(score, UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         }
