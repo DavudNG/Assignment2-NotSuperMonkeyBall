@@ -26,7 +26,7 @@ public class FinishFlag : MonoBehaviour
             FinishLevelScript finishLevel = FindObjectOfType<FinishLevelScript>(); //deprecated but works for now
             // Play the sound dictating the end of the level
             SoundManager.PlaySound(SoundType.WIN);
-            // Some debigging
+            // Some debugging
             Debug.Log("Level Complete! Score: " + score);
             // Shows the finish level screen, passing thrtough the players score and the current level index
             finishLevel.DisplayFinishLevelScreen(score, UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);

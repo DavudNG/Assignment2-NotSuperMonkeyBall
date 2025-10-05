@@ -20,7 +20,6 @@ public class OnClick : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("keep yourself safe");
         sceneController.LoadScene(1);
     }
 }
