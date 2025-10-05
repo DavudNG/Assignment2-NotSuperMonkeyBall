@@ -1,6 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+    FontSwitch.cs
+    Author: Angus
+    Desc: This script is attached to the Dyslexia font toggle and is supposed to manage
+        this toggle to show the correct state and manage the player preferences related to the dyslexia font.
+    Issue: This script unfortunatly has trouble toggling the UI toggle when the dyslexia font is enabled
+        The toggle struggled to visually represent the correct state of the PlayerPrefs value
+*/
 public class ToggleBehavior : MonoBehaviour
 {
 
@@ -17,8 +25,8 @@ public class ToggleBehavior : MonoBehaviour
     void Start()
     {
         // Set the toggle display to match the current PlayerPrefs value
-        updateToggleDisplay(); 
-        
+        updateToggleDisplay();
+
         // Debugging to check the current state of the PlayerPrefs value
         Debug.Log("DyslexiaFont Player Pref is read as: " + PlayerPrefs.GetInt("DyslexiaFont", 0));
     }

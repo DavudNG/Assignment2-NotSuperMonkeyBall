@@ -1,20 +1,13 @@
 using UnityEngine;
 
+/*
+    FinishFlag.cs
+    Author: Angus
+    Desc: This script is attached to the flag at the end of each level.
+        It detects when the player collides with the flag and triggers the completion of the level
+*/
 public class FinishFlag : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        // Don't need this
-        Debug.Log(Application.persistentDataPath);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // Don't need this
-    }
-    
     // Monitor when something enters the trigger area of the finish flag
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -26,10 +19,16 @@ public class FinishFlag : MonoBehaviour
         if (rb != null && other.CompareTag("Ball"))
         {
             // We need to read the players score at the time of collision
-            int score = (int)FindObjectOfType<LevelTimerScript>().currentTime;
-            FinishLevelScript finishLevel = FindObjectOfType<FinishLevelScript>();
+            // This is the 'currentTime', or the amount of time left in the level
+            // 'currentTime' is essentially the players score
+            int score = (int)FindObjectOfType<LevelTimerScript>().currentTime; //deprecated but works for now
+            // Find the finish level UI elements
+            FinishLevelScript finishLevel = FindObjectOfType<FinishLevelScript>(); //deprecated but works for now
+            // Play the sound dictating the end of the level
             SoundManager.PlaySound(SoundType.WIN);
+            // Some debigging
             Debug.Log("Level Complete! Score: " + score);
+            // Shows the finish level screen, passing thrtough the players score and the current level index
             finishLevel.DisplayFinishLevelScreen(score, UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         }
     }

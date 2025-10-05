@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/*
+    WindForce.cs
+    Author: Angus
+    Desc: This script is attached to the player and ball specifically on level 3
+        This script applies a constant force against the player and the ball, simulating a sandstorm
+*/
 public class WindForce : MonoBehaviour
 {
     // Set the direction for the force, the value (-1, 0) means to the left
@@ -19,7 +25,7 @@ public class WindForce : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         // If the object has no rigid body, log an error
-        if(rb == null)
+        if (rb == null)
             Debug.LogError("No Rigidbody2D found on this object!");
     }
 
