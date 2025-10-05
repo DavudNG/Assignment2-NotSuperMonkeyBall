@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3098397071889269923}
   - component: {fileID: 258479055381437797}
   - component: {fileID: 213553842486938103}
+  - component: {fileID: 7525318251927782635}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -136,3 +137,17 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7525318251927782635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6551150591982891824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 599b2b479f0eaac4db2aad19e4b30d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FontSwitch
+  defaultFont: {fileID: 11400000, guid: 411291dbc7be7b246b745f2405f82c9b, type: 2}
+  dyslexiaFont: {fileID: 11400000, guid: 913e610337e27144c91c58976ef68591, type: 2}
