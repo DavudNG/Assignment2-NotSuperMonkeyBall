@@ -25,6 +25,7 @@ public class FinishFlag : MonoBehaviour
         if (rb != null && other.CompareTag("Ball"))
         {
             FinishLevelScript finishLevel = FindObjectOfType<FinishLevelScript>();
+            SoundManager.PlaySound(SoundType.WIN);
             finishLevel.DisplayFinishLevelScreen();
         }
     }

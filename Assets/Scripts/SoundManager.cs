@@ -11,7 +11,15 @@ public enum SoundType
     BOUNCE,
     DEATH,
     ENEMY,
-    LAND
+    LAND,
+    LAUNCH,
+
+    LEVEL1MUSIC,
+    LEVEL2MUSIC,
+    LEVEL3MUSIC,
+
+    MENUMUSIC,
+    HURT
 }
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour

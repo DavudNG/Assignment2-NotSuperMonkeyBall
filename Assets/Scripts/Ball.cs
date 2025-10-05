@@ -52,7 +52,8 @@ public class Ball : MonoBehaviour
     {
         if(isKicked)
         {
-            if(isReversed)
+            SoundManager.PlaySound(SoundType.HIT);
+            if (isReversed)
             {
                 this.rb.AddForce(new Vector2(-kickStrength, 0), ForceMode2D.Force);
             }
@@ -66,7 +67,7 @@ public class Ball : MonoBehaviour
 
         if (isLaunched)
         {
-            
+            SoundManager.PlaySound(SoundType.LAUNCH);
             if (isReversed)
             {
                 this.rb.AddForce(new Vector2(-kickStrength, launchStrength), ForceMode2D.Force);
