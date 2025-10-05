@@ -1,25 +1,31 @@
 using UnityEngine;
 
+/*
+    PlayerAttack.cs     
+    Author: David
+
+    Desc: This script handles the ball's logic such as when it is hit 
+        by the player, the hitflash and being frozen
+*/
 public class PlayerAttack : MonoBehaviour
 {
-    public PlayerMovement myPlayer;
-    public Transform AttackHitbox;
-    public Animator myAnimator;
-    public SpriteRenderer myRenderer;
+    public PlayerMovement myPlayer; // Ref to the player 
+    public Transform AttackHitbox; // Ref to the transform 
+    public Animator myAnimator; // Ref to the animator of the ball 
+    public SpriteRenderer myRenderer; // Ref to the renderer of the ball
 
-    public bool isAttacking;
-    public bool isAttackReady;
+    public bool isAttackReady; // Bool to check whether the player is ready to atk and to stop atks starting if it isnt
 
-    public float attackCooldownCount;
-    public float attackCooldown;
+    public float attackCooldownCount; // 
+    public float attackCooldown; // 
     
-    public float attackTimer;
-    public float attackTimerMax;
+    public float attackTimer; // 
+    public float attackTimerMax; // 
 
-    public LayerMask InteractableLayer;
-    public Vector2 raySize;
-    public float castDistance;
-    public float fOffset;
+    public LayerMask InteractableLayer; // 
+    public Vector2 raySize; // 
+    public float castDistance; // float that determines how far to cast 
+    public float fOffset; // float that determines how much offset to add for the collision check
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -115,7 +121,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(AttackHitbox.position - AttackHitbox.forward * castDistance, raySize);
+        Gizmos.DrawWireCube(AttackHitbox.position - AttackHitbox.forward * castDistance, raySize); 
         Gizmos.DrawWireCube(new Vector3(AttackHitbox.position.x + fOffset, AttackHitbox.position.y,1) - AttackHitbox.forward * castDistance, raySize);
     }
 }

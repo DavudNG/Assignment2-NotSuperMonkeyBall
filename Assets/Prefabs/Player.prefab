@@ -5205,6 +5205,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   health: 3
+  myRenderer: {fileID: 932260860571765439}
+  flashTime: 0.2
 --- !u!1 &8789442413608784062
 GameObject:
   m_ObjectHideFlags: 0
@@ -5335,7 +5337,6 @@ MonoBehaviour:
   AttackHitbox: {fileID: 7143556553447409855}
   myAnimator: {fileID: 187298055148906715}
   myRenderer: {fileID: 4455319230096314895}
-  isAttacking: 0
   isAttackReady: 0
   attackCooldownCount: 0
   attackCooldown: 1
